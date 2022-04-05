@@ -1,50 +1,57 @@
 #include <iostream>
+#include <string.h>
+#include <memory>
 #include <fstream>
-#include <filesystem>
-using namespace std;
 
+void Login()  {
+  char username[64], password[64];
+  memset(username, 0, sizeof(username));
+  memset(password, 0, sizeof(password));
 
-int c;
-void login();
-void registers();
+  std::cout << "\nPlease enter your username: ";
+  std::cin >> username;
+  std::cout << "\nPlease enter your password: ";
+  std::cin >> password;
 
+  std::cout << "Attempting login...\n";
 
-int main(){
-  cout << "Welcome to the login page" << endl;
-  cout << "What would you like to do?" << endl;
-  cout << "1) Login" << endl;
-  cout << "2) Register" << endl;
-  cout << "3) Leave" << endl;
+}
 
+void Register() {
+  char username[64], password[64];
+  memset(username, 0, sizeof(username));
+  memset(password, 0, sizeof(password));
 
-  cin >> c;
+  std::cout << "\nPlease enter your username: ";
+  std::cin >> username;
+  std::cout << "\nPlease enter your password: ";
+  std::cin >> password;
 
-  switch(c){
-    case 1:
-      login();
-      break;
-    case 2:
-      registers();
-      break;
-    case 3:
-      return EXIT_SUCCESS;
-      break;
-    default:
-      cout << "Select a number between 1 to 3";
-      main();
+  std::cout << "Attempting registration...\n";
+  
+}
+
+int main()  {
+
+  std::cout << "Select an option!\n1) Login\n2) Register" << std::endl;
+SelectOption:
+  std::cout << "Option: ";
+  char responce[256];
+  memset(responce, 0, sizeof(responce));
+  std::cin >> responce;
+
+  if (strcmp(responce, "1") == 0)
+    Login();
+  else if (strcmp(responce, "2") == 0)
+    Register();
+  else if((unsigned)strlen(responce) > 1)  {
+    std::cout << "invalid option selected. Please try again.\n";
+    goto SelectOption;
+  }
+  else {
+    std::cout << "invalid option selected. Please try again.\n";
+    goto SelectOption;
   }
 
-  void login(){
-    string username, password;
-    cout << "Enter your username and password" << endl;
-    cin >> username;
-    cin >> password;
-
-    cout << "hi" << endl;
-  }
-
-  void registers(){
-    string username, password;
-    cout << "hi" << endl;
-  }
+  return 0;
 }
